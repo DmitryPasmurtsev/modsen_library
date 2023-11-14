@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+jwt:
+  secret: mLcQSzMtQ2B_UJ-NLWyBftO06lFq4M9riaQfzpsZbv0
