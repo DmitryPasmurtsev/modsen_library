@@ -1,0 +1,9 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: authentication-service
+jwt:
+  secret: mLcQSzMtQ2B_UJ-NLWyBftO06lFq4M9riaQfzpsZbv0
+  expiration: 3600
