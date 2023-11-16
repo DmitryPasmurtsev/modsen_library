@@ -3,6 +3,7 @@ package com.modsen.books.services.impl;
 import com.modsen.books.dto.AuthorDTO;
 import com.modsen.books.dto.BookRequest;
 import com.modsen.books.dto.BookResponse;
+import com.modsen.books.dto.WebClientRequest;
 import com.modsen.books.exceptions.NotCreatedException;
 import com.modsen.books.exceptions.NotFoundException;
 import com.modsen.books.exceptions.WebClientException;
@@ -50,7 +51,6 @@ public class BookServiceImpl implements BookService {
         Author author = authorRepository
                 .findByNameAndSurnameAndPatronymic(authorDTO.getName(), authorDTO.getSurname(), authorDTO.getPatronymic())
                 .orElseGet(() -> createAuthor(authorDTO));
-
         book.setAuthor(author);
         bookRepository.save(book);
         sendCreationRequest(book.getId());
@@ -64,8 +64,8 @@ public class BookServiceImpl implements BookService {
     private void sendCreationRequest(Long id) {
         webClient.post()
                 .uri(LIBRARY_MODULE_URI)
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(id)
+                //.contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(new WebClientRequest(id))
                 .header("Authorization", token)
                 .retrieve()
                 .toBodilessEntity()

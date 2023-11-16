@@ -1,6 +1,7 @@
 package com.modsen.library.controllers;
 
 import com.modsen.library.dto.BookResponse;
+import com.modsen.library.dto.WebClientRequest;
 import com.modsen.library.service.LibraryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,9 +24,9 @@ public class LibraryController {
 
     @PostMapping
     @Operation(summary = "Добавить запись с новой книгой")
-    public ResponseEntity<String> createLibraryEntry(@RequestBody Long id) {
-        libraryService.add(id);
-        return ResponseEntity.ok("Добавлена книга с id " + id);
+    public ResponseEntity<String> createLibraryEntry(@RequestBody WebClientRequest request) {
+        libraryService.add(request.getId());
+        return ResponseEntity.ok("Добавлена книга с id " + request.getId());
     }
 
     @DeleteMapping("/{id}")
